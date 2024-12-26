@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
+<h1>Корзина</h1>
+{% if books %}
+<table>
+    <thead>
+        <tr>
+            <th>Книга</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Итого</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in books %}
+        <tr>
+            <td>{{ item.book.title }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.book.price }}</td>
+            <td>{{ item.total }}</td>
+            <td>
+                <a href="{% url 'update_cart' item.book.id %}?action=increment">+</a>
+                <a href="{% url 'update_cart' item.book.id %}?action=decrement">-</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>Общая стоимость: {{ total_price }} руб.</p>
+<a href="/order/" class="btn">Оформить заказ</a>
+{% else %}
+<p>Корзина пуста.</p>
+{% endif %}
+{% endblock %}
