@@ -1,13 +1,17 @@
 import logging
 import os
 
-from aiogram import Bot, Dispatcher, html
+from aiohttp import web
+from aiogram import Bot, Dispatcher, html, Router
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 import asyncio
 from dotenv import load_dotenv
+
+import db_controller as db
+
 
 load_dotenv()
 API_HOST = "127.0.0.1"
